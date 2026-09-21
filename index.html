@@ -21,66 +21,68 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
             text-align: center;
-            padding: 20px 10px;
+            padding: 30px 15px;
         }
 
         .container {
             animation: fadeIn 2s ease-in-out forwards;
             z-index: 5;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         h1 {
             color: #b58100;
-            font-size: 2.1rem;
+            font-size: 2.3rem;
             margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
         }
 
         p {
             color: #795548;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 500;
             max-width: 400px;
-            margin: 0 auto 15px auto;
+            margin: 0 auto;
         }
 
-        /* Contenedor del Ramo */
+        /* Jardín contenedor de las 8 flores */
         .garden {
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 6px;
+            gap: 10px;
             width: 100%;
-            max-width: 480px;
-            height: 380px;
+            max-width: 600px;
+            height: 450px;
             position: relative;
             z-index: 5;
             margin-bottom: 10px;
         }
 
+        /* Estructura base de cada flor */
         .flower-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            width: 11%;
+            width: 12%;
         }
 
-        /* Variación de escalas para las 8 flores */
-        .f1 { transform: scale(1.15); z-index: 5; }
-        .f2 { transform: scale(0.95); z-index: 4; }
-        .f3 { transform: scale(1.05); z-index: 4; }
+        /* Ajustes de tamaño y escala para dar variedad a las 8 flores */
+        .f1 { transform: scale(1.1); z-index: 5; }
+        .f2 { transform: scale(0.9); z-index: 4; }
+        .f3 { transform: scale(1.0); z-index: 4; }
         .f4 { transform: scale(0.85); z-index: 3; }
-        .f5 { transform: scale(0.9); z-index: 3; }
+        .f5 { transform: scale(0.95); z-index: 3; }
         .f6 { transform: scale(0.8); z-index: 2; }
         .f7 { transform: scale(0.85); z-index: 2; }
         .f8 { transform: scale(0.75); z-index: 1; }
 
+        /* Cabeza de la flor */
         .flower-head {
             position: relative;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -93,17 +95,19 @@
             animation: spin 30s linear infinite, scaleUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* Pétalos simétricos */
         .petal {
             position: absolute;
             background: #ffd54f;
-            border: 1.5px solid #ffca28;
+            border: 2px solid #ffca28;
             border-radius: 0 70% 0 70%;
-            width: 26px;
-            height: 26px;
-            top: 14px;
-            left: 40px;
+            width: 30px;
+            height: 30px;
+            top: 15px;
+            left: 45px;
             transform-origin: 0% 100%;
             opacity: 0.95;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .petal:nth-child(1) { transform: rotate(0deg); }
@@ -115,54 +119,61 @@
         .petal:nth-child(7) { transform: rotate(270deg); }
         .petal:nth-child(8) { transform: rotate(315deg); }
 
+        /* Centro de la flor */
         .center {
             position: absolute;
             background: #ffb300;
-            border: 1.5px solid #ffa000;
+            border: 2px solid #ffa000;
             border-radius: 50%;
-            width: 25px;
-            height: 25px;
+            width: 28px;
+            height: 28px;
             z-index: 10;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
         }
 
-        /* Alturas de tallos */
+        /* Tallos personalizados por altura */
         .stem {
-            width: 5px;
+            width: 6px;
             background: linear-gradient(to bottom, #4caf50, #2e7d32);
-            border-radius: 3px;
+            border-radius: 4px;
             transform-origin: bottom center;
             animation: growStem 2s ease-out forwards;
         }
 
-        .f1 .stem { height: 210px; }
-        .f2 .stem { height: 180px; }
-        .f3 .stem { height: 195px; }
-        .f4 .stem { height: 150px; }
-        .f5 .stem { height: 165px; }
-        .f6 .stem { height: 135px; }
-        .f7 .stem { height: 145px; }
-        .f8 .stem { height: 120px; }
+        .f1 .stem { height: 240px; }
+        .f2 .stem { height: 190px; }
+        .f3 .stem { height: 215px; }
+        .f4 .stem { height: 160px; }
+        .f5 .stem { height: 180px; }
+        .f6 .stem { height: 140px; }
+        .f7 .stem { height: 150px; }
+        .f8 .stem { height: 130px; }
 
+        /* Hojas */
         .leaf {
             position: absolute;
             background: linear-gradient(to right, #81c784, #4caf50);
             border: 1px solid #388e3c;
-            width: 18px;
-            height: 11px;
+            width: 22px;
+            height: 14px;
             border-radius: 0 100% 0 100%;
             opacity: 0;
             animation: fadeInLeaf 1s 1.5s ease-out forwards;
         }
 
-        .leaf.left { left: -14px; top: 45px; transform: rotate(-15deg); }
-        .leaf.right { right: -14px; top: 65px; transform: scaleX(-1) rotate(-15deg); }
+        .leaf.left { left: -18px; top: 40px; transform: rotate(-15deg); }
+        .leaf.right { right: -18px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
 
         /* Lluvia de pétalos de fondo */
         .falling-petals {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; pointer-events: none; z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .falling-petal {
@@ -173,6 +184,7 @@
             animation: fall linear infinite;
         }
 
+        /* Animaciones */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes growStem { from { transform: scaleY(0); } to { transform: scaleY(1); } }
@@ -181,6 +193,7 @@
         @keyframes fall {
             0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
             10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
             100% { top: 105vh; transform: translateX(120px) rotate(360deg); opacity: 0; }
         }
     </style>
@@ -189,35 +202,25 @@
 
     <!-- Lluvia de pétalos -->
     <div class="falling-petals">
-        <div class="falling-petal" style="width: 15px; height: 15px; left: 15%; animation-duration: 6s;"></div>
-        <div class="falling-petal" style="width: 22px; height: 22px; left: 35%; animation-duration: 8s; animation-delay: 2s;"></div>
-        <div class="falling-petal" style="width: 12px; height: 12px; left: 55%; animation-duration: 5s; animation-delay: 1s;"></div>
-        <div class="falling-petal" style="width: 18px; height: 18px; left: 75%; animation-duration: 7s; animation-delay: 3s;"></div>
+        <div class="falling-petal" style="width: 15px; height: 15px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+        <div class="falling-petal" style="width: 22px; height: 22px; left: 25%; animation-duration: 8s; animation-delay: 2s;"></div>
+        <div class="falling-petal" style="width: 12px; height: 12px; left: 45%; animation-duration: 5s; animation-delay: 1s;"></div>
+        <div class="falling-petal" style="width: 18px; height: 18px; left: 65%; animation-duration: 7s; animation-delay: 3s;"></div>
         <div class="falling-petal" style="width: 14px; height: 14px; left: 85%; animation-duration: 6s; animation-delay: 1.5s;"></div>
+        <div class="falling-petal" style="width: 20px; height: 20px; left: 55%; animation-duration: 9s; animation-delay: 4s;"></div>
     </div>
 
-    <!-- Zona de Texto Única -->
+    <!-- Mensaje Superior Único -->
     <div class="container">
-        <h1>¡Feliz 21 de Septiembre! 🌼</h1>
-        <p>Te prometí que hoy no te quedarías sin tus flores amarillas...</p>
-        
-        <!-- Botón Único de Música -->
-        <button class="music-btn" id="playBtn" onclick="toggleMusic()">
-            🌻 Escuchar Floricienta
-        </button>
+        <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
+        <p>Un detalle digital para celebrar nuestra hermosa amistad. ¡Que nunca te falten motivos para sonreír!</p>
     </div>
-
-    <!-- Archivo de Audio Oficial Real de Flores Amarillas -->
-    <audio id="bgMusic" loop preload="auto">
-        <source src="https://archive.org" type="audio/mp3">
-    </audio>
     
-    <!-- El Ramo de 8 Flores -->
+    <!-- El Ramo Completo de 8 Flores -->
     <div class="garden">
         <div class="flower-wrapper f6"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
-        <div class="flower-wrapper f6"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
         <div class="flower-wrapper f4"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf right"></div></div></div>
-        <div class="flower-wrapper f4"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf right"></div></div></div>
-        <div class="flower-wrapper f2"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
         <div class="flower-wrapper f2"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
         <div class="flower-wrapper f1"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div><div class="leaf right"></div></div></div>
+        <div class="flower-wrapper f3"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf right"></div></div></div>
+        <div class="flower-wrapper f5"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
