@@ -13,82 +13,70 @@
 
         body {
             background: linear-gradient(135deg, #fffaeb 0%, #ffe082 100%);
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow-x: hidden;
+            overflow: hidden;
             text-align: center;
-            padding: 20px 10px;
+            padding: 30px 15px;
         }
 
-        .header-container {
-            z-index: 10;
-            margin-bottom: 15px;
-            animation: fadeIn 1.5s ease-in-out;
+        .container {
+            animation: fadeIn 2s ease-in-out forwards;
+            z-index: 5;
+            margin-top: 10px;
         }
 
         h1 {
             color: #b58100;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.08);
+            font-size: 2.3rem;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
         }
 
         p {
             color: #795548;
-            font-size: 1rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            max-width: 320px;
-            margin: 0 auto 15px auto;
-        }
-
-        /* Botón de Música Estilizado */
-        .music-btn {
-            background: #ffb300;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s, background 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .music-btn:hover {
-            background: #ffa000;
-            transform: scale(1.05);
-        }
-
-        /* Contenedor del campo con las 8 flores */
-        .garden {
-            position: relative;
-            width: 100%;
             max-width: 400px;
-            height: 320px;
-            margin-top: auto;
-            z-index: 5;
+            margin: 0 auto;
         }
 
-        /* Estructura base de cada flor individual */
+        /* Jardín contenedor de las 3 flores */
+        .garden {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 20px;
+            width: 100%;
+            max-width: 500px;
+            height: 450px;
+            position: relative;
+            z-index: 5;
+            margin-bottom: 10px;
+        }
+
+        /* Estructura base de cada flor */
         .flower-wrapper {
-            position: absolute;
-            bottom: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transform-origin: bottom center;
+            position: relative;
         }
+
+        /* Ajustes de tamaño y escala para variedad */
+        .flower-wrapper.main { transform: scale(1.1); z-index: 3; }
+        .flower-wrapper.left { transform: scale(0.85) rotate(-8deg); z-index: 2; }
+        .flower-wrapper.right { transform: scale(0.9) rotate(8deg); z-index: 2; }
 
         /* Cabeza de la flor */
         .flower-head {
             position: relative;
+            width: 140px;
+            height: 140px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -98,67 +86,24 @@
             position: relative;
             width: 100%;
             height: 100%;
-            animation: spin 25s linear infinite, scaleUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+            animation: spin 30s linear infinite, scaleUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Pétalos */
+        /* Pétalos simétricos */
         .petal {
             position: absolute;
             background: #ffd54f;
-            border: 1.5px solid #ffca28;
+            border: 2px solid #ffca28;
             border-radius: 0 70% 0 70%;
+            width: 45px;
+            height: 45px;
+            top: 25px;
+            left: 70px;
             transform-origin: 0% 100%;
             opacity: 0.95;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
-        /* Centro de la flor */
-        .center {
-            position: absolute;
-            background: #ffb300;
-            border: 1.5px solid #ffa000;
-            border-radius: 50%;
-            z-index: 10;
-        }
-
-        /* Tallo */
-        .stem {
-            background: linear-gradient(to bottom, #4caf50, #2e7d32);
-            border-radius: 3px;
-            transform-origin: bottom center;
-            animation: growStem 1.5s ease-out backwards;
-        }
-
-        /* --- CONFIGURACIÓN DE LAS 8 FLORES --- */
-        
-        /* Flores grandes (1, 2, 3) */
-        .f-lg .flower-head { width: 70px; height: 70px; }
-        .f-lg .petal { width: 23px; height: 23px; top: 12px; left: 35px; }
-        .f-lg .center { width: 22px; height: 22px; }
-        .f-lg .stem { width: 5px; height: 160px; }
-
-        /* Flores medianas (4, 5, 6) */
-        .f-md .flower-head { width: 55px; height: 55px; }
-        .f-md .petal { width: 18px; height: 18px; top: 9.5px; left: 27.5px; }
-        .f-md .center { width: 17px; height: 17px; }
-        .f-md .stem { width: 4px; height: 120px; }
-
-        /* Flores pequeñas (7, 8) */
-        .f-sm .flower-head { width: 45px; height: 45px; }
-        .f-sm .petal { width: 15px; height: 15px; top: 7.5px; left: 22.5px; }
-        .f-sm .center { width: 14px; height: 14px; }
-        .f-sm .stem { width: 3px; height: 90px; }
-
-        /* Distribución en el eje horizontal (X) y retraso de animación */
-        .f1 { left: 45%; z-index: 4; animation-delay: 0.1s; }
-        .f2 { left: 20%; z-index: 3; animation-delay: 0.3s; }
-        .f3 { left: 70%; z-index: 3; animation-delay: 0.5s; }
-        .f4 { left: 3%; z-index: 2; animation-delay: 0.2s; }
-        .f5 { left: 32%; z-index: 2; animation-delay: 0.6s; }
-        .f6 { left: 58%; z-index: 2; animation-delay: 0.4s; }
-        .f7 { left: 84%; z-index: 1; animation-delay: 0.7s; }
-        .f8 { left: 48%; z-index: 1; animation-delay: 0.8s; }
-
-        /* Rotación de pétalos para armar la circunferencia */
         .petal:nth-child(1) { transform: rotate(0deg); }
         .petal:nth-child(2) { transform: rotate(45deg); }
         .petal:nth-child(3) { transform: rotate(90deg); }
@@ -168,68 +113,133 @@
         .petal:nth-child(7) { transform: rotate(270deg); }
         .petal:nth-child(8) { transform: rotate(315deg); }
 
+        /* Centro de la flor */
+        .center {
+            position: absolute;
+            background: #ffb300;
+            border: 2px solid #ffa000;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            z-index: 10;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Tallos personalizados por altura */
+        .stem {
+            width: 8px;
+            background: linear-gradient(to bottom, #4caf50, #2e7d32);
+            border-radius: 4px;
+            transform-origin: bottom center;
+            animation: growStem 2s ease-out forwards;
+        }
+
+        .main .stem { height: 240px; }
+        .left .stem { height: 180px; }
+        .right .stem { height: 210px; }
+
+        /* Hojas */
+        .leaf {
+            position: absolute;
+            background: linear-gradient(to right, #81c784, #4caf50);
+            border: 1px solid #388e3c;
+            width: 35px;
+            height: 20px;
+            border-radius: 0 100% 0 100%;
+            opacity: 0;
+            animation: fadeInLeaf 1s 1.5s ease-out forwards;
+        }
+
+        .leaf.left { left: -30px; top: 60px; transform: rotate(-15deg); }
+        .leaf.right { right: -30px; top: 100px; transform: scaleX(-1) rotate(-15deg); }
+
         /* Lluvia de pétalos de fondo */
         .falling-petals {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            overflow: hidden; pointer-events: none; z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
         }
 
         .falling-petal {
             position: absolute;
             background: #ffe082;
             border-radius: 0 80% 0 80%;
-            opacity: 0.6;
+            opacity: 0.7;
             animation: fall linear infinite;
         }
 
-        /* Animaciones del sistema */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
-        @keyframes growStem { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes growStem {
+            from { transform: scaleY(0); }
+            to { transform: scaleY(1); }
+        }
+
+        @keyframes fadeInLeaf {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         @keyframes fall {
-            0% { top: -20px; transform: translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
-            100% { top: 105vh; transform: translateX(80px) rotate(360deg); opacity: 0; }
+            0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.7; }
+            90% { opacity: 0.7; }
+            100% { top: 105vh; transform: translateX(120px) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia de pétalos animada -->
+    <!-- Lluvia de pétalos -->
     <div class="falling-petals">
-        <div class="falling-petal" style="width: 12px; height: 12px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
-        <div class="falling-petal" style="width: 16px; height: 16px; left: 30%; animation-duration: 8s; animation-delay: 2s;"></div>
-        <div class="falling-petal" style="width: 10px; height: 10px; left: 50%; animation-duration: 5s; animation-delay: 1s;"></div>
-        <div class="falling-petal" style="width: 14px; height: 14px; left: 70%; animation-duration: 7s; animation-delay: 3s;"></div>
-        <div class="falling-petal" style="width: 15px; height: 15px; left: 90%; animation-duration: 6s; animation-delay: 4s;"></div>
+        <div class="falling-petal" style="width: 15px; height: 15px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
+        <div class="falling-petal" style="width: 22px; height: 22px; left: 25%; animation-duration: 8s; animation-delay: 2s;"></div>
+        <div class="falling-petal" style="width: 12px; height: 12px; left: 45%; animation-duration: 5s; animation-delay: 1s;"></div>
+        <div class="falling-petal" style="width: 18px; height: 18px; left: 65%; animation-duration: 7s; animation-delay: 3s;"></div>
+        <div class="falling-petal" style="width: 14px; height: 14px; left: 85%; animation-duration: 6s; animation-delay: 1.5s;"></div>
+        <div class="falling-petal" style="width: 20px; height: 20px; left: 55%; animation-duration: 9s; animation-delay: 4s;"></div>
     </div>
 
-    <!-- Textos superiores y Botón de control -->
-    <div class="header-container">
+    <div class="container">
         <h1>¡Feliz 21 de Septiembre! 🌼</h1>
         <p>Te prometí que hoy no te quedarías sin tus flores amarillas...</p>
-        
-        <button class="music-btn" id="playBtn" onclick="toggleMusic()">
-            <span>▶ Escuchar Música</span>
-        </button>
     </div>
-
-    <!-- Música de fondo (Audio de prueba libre, cámbialo por tu link si tienes uno propio) -->
-    <audio id="bgMusic" loop>
-        <source src="https://soundhelix.com" type="audio/mp3">
-    </audio>
-
-    <!-- Campo con las 8 Flores distribuidas -->
+    
+    <!-- El Ramo de Flores -->
     <div class="garden">
-        <!-- Flor 1 (Grande) -->
-        <div class="flower-wrapper f-lg f1"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"></div></div>
-        <!-- Flor 2 (Grande) -->
-        <div class="flower-wrapper f-lg f2"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"></div></div>
-        <!-- Flor 3 (Grande) -->
-        <div class="flower-wrapper f-lg f3"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"></div></div>
-        <!-- Flor 4 (Mediana) -->
-        <div class="flower-wrapper f-md f4"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"></div></div>
-        <!-- Flor 5 (Mediana) -->
+        <!-- Flor Izquierda (Más pequeña y baja) -->
+        <div class="flower-wrapper left">
+            <div class="flower-head">
+                <div class="flower">
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                    <div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div>
+                </div>
+                <div class="center"></div>
+            </div>
+            <div class="stem"><div class="leaf left"></div></div>
+        </div>
+
+        <!-- Flor Central (La más grande y alta) -->
+        <div class="flower-wrapper main">
+            <div class="flower-head">
+                <div class="flower">
+                    <div class="petal"></div><div class="petal"></div><div class=
