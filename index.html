@@ -21,28 +21,56 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
             text-align: center;
-            padding: 30px 15px;
+            padding: 20px 15px;
+            position: relative;
+        }
+
+        /* Marcador del Minijuego */
+        .score-board {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: #b58100;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            font-size: 0.9rem;
+            z-index: 20;
+            border: 1px solid #ffd54f;
+            pointer-events: none;
         }
 
         .container {
-            animation: fadeIn 2s ease-in-out forwards;
             z-index: 5;
-            margin-top: 10px;
+            margin-top: 40px;
+            min-height: 110px; /* Evita que el diseño salte mientras se escribe */
         }
 
         h1 {
             color: #b58100;
-            font-size: 2.3rem;
+            font-size: 2.1rem;
             margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
         }
 
-        p {
+        /* Estilos de la Máquina de Escribir */
+        .typewriter-text {
             color: #795548;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
             max-width: 400px;
             margin: 0 auto;
+            display: inline-block;
+            border-right: 2px solid #795548;
+            white-space: normal;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent }
+            50% { border-color: #795548; }
         }
 
         /* Jardín contenedor de las 8 flores */
@@ -53,10 +81,11 @@
             gap: 10px;
             width: 100%;
             max-width: 600px;
-            height: 450px;
+            height: 430px;
             position: relative;
             z-index: 5;
             margin-bottom: 10px;
+            pointer-events: none; /* Permite tocar los pétalos detrás de las flores */
         }
 
         /* Estructura base de cada flor */
@@ -68,7 +97,7 @@
             width: 12%;
         }
 
-        /* Ajustes de tamaño y escala para dar variedad a las 8 flores */
+        /* Ajustes de escala */
         .f1 { transform: scale(1.1); z-index: 5; }
         .f2 { transform: scale(0.9); z-index: 4; }
         .f3 { transform: scale(1.0); z-index: 4; }
@@ -78,7 +107,6 @@
         .f7 { transform: scale(0.85); z-index: 2; }
         .f8 { transform: scale(0.75); z-index: 1; }
 
-        /* Cabeza de la flor */
         .flower-head {
             position: relative;
             width: 90px;
@@ -95,7 +123,6 @@
             animation: spin 30s linear infinite, scaleUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Pétalos simétricos */
         .petal {
             position: absolute;
             background: #ffd54f;
@@ -119,7 +146,6 @@
         .petal:nth-child(7) { transform: rotate(270deg); }
         .petal:nth-child(8) { transform: rotate(315deg); }
 
-        /* Centro de la flor */
         .center {
             position: absolute;
             background: #ffb300;
@@ -131,7 +157,6 @@
             box-shadow: inset 0 0 8px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
         }
 
-        /* Tallos personalizados por altura */
         .stem {
             width: 6px;
             background: linear-gradient(to bottom, #4caf50, #2e7d32);
@@ -149,7 +174,6 @@
         .f7 .stem { height: 150px; }
         .f8 .stem { height: 130px; }
 
-        /* Hojas */
         .leaf {
             position: absolute;
             background: linear-gradient(to right, #81c784, #4caf50);
@@ -164,59 +188,57 @@
         .leaf.left { left: -18px; top: 40px; transform: rotate(-15deg); }
         .leaf.right { right: -18px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
 
-        /* Lluvia de pétalos de fondo */
-        .falling-petals {
+        /* Contenedor del juego */
+        #game-layer {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
+            z-index: 2;
         }
 
+        /* Pétalos interactivos */
         .falling-petal {
             position: absolute;
             background: #ffe082;
             border-radius: 0 80% 0 80%;
-            opacity: 0.7;
-            animation: fall linear infinite;
+            opacity: 0.8;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* Animaciones */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Partículas de explosión */
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd54f;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
         @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes growStem { from { transform: scaleY(0); } to { transform: scaleY(1); } }
         @keyframes fadeInLeaf { from { opacity: 0; } to { opacity: 1; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes fall {
-            0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { top: 105vh; transform: translateX(120px) rotate(360deg); opacity: 0; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia de pétalos -->
-    <div class="falling-petals">
-        <div class="falling-petal" style="width: 15px; height: 15px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
-        <div class="falling-petal" style="width: 22px; height: 22px; left: 25%; animation-duration: 8s; animation-delay: 2s;"></div>
-        <div class="falling-petal" style="width: 12px; height: 12px; left: 45%; animation-duration: 5s; animation-delay: 1s;"></div>
-        <div class="falling-petal" style="width: 18px; height: 18px; left: 65%; animation-duration: 7s; animation-delay: 3s;"></div>
-        <div class="falling-petal" style="width: 14px; height: 14px; left: 85%; animation-duration: 6s; animation-delay: 1.5s;"></div>
-        <div class="falling-petal" style="width: 20px; height: 20px; left: 55%; animation-duration: 9s; animation-delay: 4s;"></div>
-    </div>
+    <!-- Marcador del Juego -->
+    <div class="score-board">🌼 Pétalos atrapados: <span id="score">0</span></div>
 
-    <!-- Mensaje Superior Único -->
+    <!-- Capa del Juego (Pétalos cayendo) -->
+    <div id="game-layer"></div>
+
+    <!-- Cabecera Animada -->
     <div class="container">
         <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
-        <p>Un detalle digital para celebrar nuestra hermosa amistad. ¡Que nunca te falten motivos para sonreír!</p>
+        <!-- Contenedor del efecto Máquina de Escribir -->
+        <div class="typewriter-text" id="typewriter"></div>
     </div>
     
-    <!-- El Ramo Completo de 8 Flores -->
+    <!-- El Ramo de 8 Flores -->
     <div class="garden">
         <div class="flower-wrapper f6"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf left"></div></div></div>
         <div class="flower-wrapper f4"><div class="flower-head"><div class="flower"><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div><div class="petal"></div></div><div class="center"></div></div><div class="stem"><div class="leaf right"></div></div></div>
