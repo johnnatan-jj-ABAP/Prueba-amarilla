@@ -21,13 +21,13 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
             text-align: center;
-            padding: 30px 15px;
+            padding: 20px 15px;
             position: relative;
         }
 
         .container {
             z-index: 10;
-            margin-top: 45px;
+            margin-top: 25px;
             width: 100%;
             max-width: 450px;
         }
@@ -35,15 +35,16 @@
         h1 {
             color: #b58100;
             font-size: 2rem;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.06);
         }
 
-        /* Efecto Máquina de Escribir Nativo */
+        /* Máquina de Escribir */
         .typewriter-container {
-            display: inline-block;
+            display: block;
             max-width: 100%;
             padding: 0 10px;
+            min-height: 40px;
         }
 
         .typewriter-text {
@@ -60,6 +61,40 @@
                 blink 0.75s step-end infinite;
         }
 
+        /* Botón de Frases Interactivo */
+        .phrase-btn {
+            background: #ffb300;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            transition: transform 0.2s, background 0.2s;
+            margin-top: 15px;
+            display: inline-flex;
+            align-items: center;
+            z-index: 30;
+        }
+
+        .phrase-btn:hover {
+            background: #ffa000;
+            transform: scale(1.05);
+        }
+
+        /* Contenedor dinámico de la frase sorpresa */
+        .phrase-display {
+            color: #b58100;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 15px;
+            min-height: 30px;
+            padding: 0 15px;
+            animation: fadeInText 0.5s ease-in-out;
+        }
+
         /* El Ramo de las 8 flores */
         .garden {
             display: flex;
@@ -68,13 +103,12 @@
             gap: 10px;
             width: 100%;
             max-width: 550px;
-            height: 400px;
+            height: 380px;
             position: relative;
             z-index: 20;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        /* Flor con reacción física al pasar el cursor o tocar */
         .flower-wrapper {
             display: flex;
             flex-direction: column;
@@ -84,13 +118,12 @@
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* REACCIÓN INTERACTIVA: Crece y resalta al pasar el mouse o tocar */
         .flower-wrapper:hover {
             transform: scale(1.25) translateY(-10px) !important;
             z-index: 50 !important;
         }
 
-        /* Variación de escalas base en el ramo */
+        /* Escalas ramo */
         .f1 { transform: scale(1.1); z-index: 5; }
         .f2 { transform: scale(0.9); z-index: 4; }
         .f3 { transform: scale(1.0); z-index: 4; }
@@ -149,7 +182,6 @@
             transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* El centro de la flor brilla cuando pasas el cursor por la flor */
         .flower-wrapper:hover .center {
             background: #ffca28;
             box-shadow: 0 0 12px #ffb300, inset 0 0 4px #fff;
@@ -163,14 +195,14 @@
             animation: growStem 2s ease-out forwards;
         }
 
-        .f1 .stem { height: 230px; }
-        .f2 .stem { height: 185px; }
-        .f3 .stem { height: 205px; }
-        .f4 .stem { height: 155px; }
-        .f5 .stem { height: 175px; }
-        .f6 .stem { height: 135px; }
-        .f7 .stem { height: 145px; }
-        .f8 .stem { height: 125px; }
+        .f1 .stem { height: 220px; }
+        .f2 .stem { height: 175px; }
+        .f3 .stem { height: 195px; }
+        .f4 .stem { height: 145px; }
+        .f5 .stem { height: 165px; }
+        .f6 .stem { height: 125px; }
+        .f7 .stem { height: 135px; }
+        .f8 .stem { height: 115px; }
 
         .leaf {
             position: absolute;
@@ -186,7 +218,7 @@
         .leaf.left { left: -14px; top: 40px; transform: rotate(-15deg); }
         .leaf.right { right: -14px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
 
-        /* Lluvia decorativa constante de fondo */
+        /* Lluvia decorativa de fondo */
         .falling-petals {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -211,28 +243,36 @@
         @keyframes fall {
             0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
-            90% { opacity: 0.6; }
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
+        @keyframes fadeInText { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia decorativa de fondo -->
+    <!-- Lluvia decorativa -->
     <div class="falling-petals">
         <div class="falling-petal" style="left: 10%; animation-duration: 6s; width: 14px; height: 14px;"></div>
-        <div class="falling-petal" style="left: 25%; animation-duration: 8s; animation-delay: 2s; width: 20px; height: 20px;"></div>
-        <div class="falling-petal" style="left: 50%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
-        <div class="falling-petal" style="left: 70%; animation-duration: 7s; animation-delay: 3s; width: 16px; height: 16px;"></div>
-        <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 1.5s; width: 14px; height: 14px;"></div>
+        <div class="falling-petal" style="left: 30%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
+        <div class="falling-petal" style="left: 70%; animation-duration: 7s; animation-delay: 2s; width: 16px; height: 16px;"></div>
+        <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 0.5s; width: 14px; height: 14px;"></div>
     </div>
 
-    <!-- Cabecera con Texto Tipo Máquina de Escribir -->
+    <!-- Cabecera con Animación y Botón -->
     <div class="container">
-        <h1>¡Feliz 21 de Septiembre, ! 🌼</h1>
+        <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
         <div class="typewriter-container">
             <div class="typewriter-text">Un detalle digital para celebrar nuestra gran amistad... ✨</div>
         </div>
+        
+        <!-- Botón de Frases -->
+        <br>
+        <button class="phrase-btn" onclick="mostrarFrase()">
+            ✨ Clic para una frase bonita
+        </button>
+        
+        <!-- Lugar donde se muestra la frase aleatoria -->
+        <div class="phrase-display" id="phraseDisplay"></div>
     </div>
     
     <!-- El Ramo de 8 Flores Interactivas -->
