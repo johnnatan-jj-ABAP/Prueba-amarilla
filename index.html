@@ -21,34 +21,40 @@
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             overflow: hidden;
             text-align: center;
-            padding: 20px 15px;
+            padding: 30px 15px;
             position: relative;
         }
 
-        /* Contenedor del texto superior */
         .container {
-            position: relative;
-            z-index: 100; 
-            margin-top: 25px;
+            z-index: 10;
+            margin-top: 45px;
             width: 100%;
             max-width: 450px;
         }
 
+        /* Estructuras contenedoras para el efecto Máquina de Escribir */
+        .typewriter-title-container, .typewriter-text-container {
+            display: inline-block;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Título Principal Animado */
         h1 {
             color: #b58100;
             font-size: 2rem;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.06);
+            border-right: 2px solid #b58100;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: 
+                typingTitle 2s steps(30, end) forwards,
+                blinkTitle 0.75s step-end infinite;
         }
 
-        /* Máquina de Escribir */
-        .typewriter-container {
-            display: block;
-            max-width: 100%;
-            padding: 0 10px;
-            min-height: 30px;
-        }
-
+        /* Subtítulo Animado (Inicia después del título) */
         .typewriter-text {
             color: #795548;
             font-size: 1.1rem;
@@ -59,46 +65,11 @@
             overflow: hidden;
             width: 0;
             animation: 
-                typing 3.5s steps(40, end) forwards,
-                blink 0.75s step-end infinite;
+                typingText 3.5s steps(40, end) 2.2s forwards,
+                blinkText 0.75s step-end infinite 2.2s;
         }
 
-        /* EL ARREGLO DEFINTIVO: pointer-events asegura el clic */
-        .phrase-btn {
-            background: #ffb300;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            transition: transform 0.2s, background 0.2s;
-            margin-top: 15px;
-            display: inline-block;
-            position: relative;
-            z-index: 99999;
-            pointer-events: auto; /* Fuerza al navegador a aceptar el clic */
-        }
-
-        .phrase-btn:hover {
-            background: #ffa000;
-            transform: scale(1.05);
-        }
-
-        .phrase-display {
-            color: #b58100;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 20px;
-            min-height: 40px;
-            padding: 0 15px;
-            position: relative;
-            z-index: 99999;
-        }
-
-        /* SOLUCIÓN AL MURO INVISIBLE: none hace que los clics atraviesen esta capa */
+        /* El Ramo de las 8 flores */
         .garden {
             display: flex;
             justify-content: center;
@@ -106,11 +77,10 @@
             gap: 10px;
             width: 100%;
             max-width: 550px;
-            height: 350px;
+            height: 400px;
             position: relative;
-            z-index: 10;
-            margin-bottom: 5px;
-            pointer-events: none; 
+            z-index: 20;
+            margin-bottom: 10px;
         }
 
         .flower-wrapper {
@@ -121,7 +91,7 @@
             width: 11%;
         }
 
-        /* Escalas ramo */
+        /* Variación de escalas base en el ramo */
         .f1 { transform: scale(1.1); z-index: 5; }
         .f2 { transform: scale(0.9); z-index: 4; }
         .f3 { transform: scale(1.0); z-index: 4; }
@@ -187,14 +157,14 @@
             animation: growStem 2s ease-out forwards;
         }
 
-        .f1 .stem { height: 200px; }
-        .f2 .stem { height: 160px; }
-        .f3 .stem { height: 180px; }
-        .f4 .stem { height: 130px; }
-        .f5 .stem { height: 150px; }
-        .f6 .stem { height: 110px; }
-        .f7 .stem { height: 120px; }
-        .f8 .stem { height: 100px; }
+        .f1 .stem { height: 230px; }
+        .f2 .stem { height: 185px; }
+        .f3 .stem { height: 205px; }
+        .f4 .stem { height: 155px; }
+        .f5 .stem { height: 175px; }
+        .f6 .stem { height: 135px; }
+        .f7 .stem { height: 145px; }
+        .f8 .stem { height: 125px; }
 
         .leaf {
             position: absolute;
@@ -207,10 +177,10 @@
             animation: fadeInLeaf 1s 1.5s ease-out forwards;
         }
 
-        .leaf.left { left: -14px; top: 35px; transform: rotate(-15deg); }
-        .leaf.right { right: -14px; top: 50px; transform: scaleX(-1) rotate(-15deg); }
+        .leaf.left { left: -14px; top: 40px; transform: rotate(-15deg); }
+        .leaf.right { right: -14px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
 
-        /* Lluvia decorativa de fondo */
+        /* Lluvia decorativa constante de fondo */
         .falling-petals {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -225,9 +195,11 @@
             animation: fall 5s linear infinite;
         }
 
-        /* Animaciones CSS */
-        @keyframes typing { from { width: 0; } to { width: 100%; } }
-        @keyframes blink { from, to { border-color: transparent; } 50% { border-color: #795548; } }
+        /* Animaciones CSS Modernas */
+        @keyframes typingTitle { from { width: 0; } to { width: 100%; } }
+        @keyframes typingText { from { width: 0; } to { width: 100%; } }
+        @keyframes blinkTitle { from, to { border-color: transparent; } 50% { border-color: #b58100; } }
+        @keyframes blinkText { from, to { border-color: transparent; } 50% { border-color: #795548; } }
         @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes growStem { from { transform: scaleY(0); } to { transform: scaleY(1); } }
         @keyframes fadeInLeaf { from { opacity: 0; } to { opacity: 1; } }
@@ -235,6 +207,7 @@
         @keyframes fall {
             0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
             10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
     </style>
@@ -244,24 +217,21 @@
     <!-- Lluvia decorativa de fondo -->
     <div class="falling-petals">
         <div class="falling-petal" style="left: 10%; animation-duration: 6s; width: 14px; height: 14px;"></div>
-        <div class="falling-petal" style="left: 30%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
+        <div class="falling-petal" style="left: 25%; animation-duration: 8s; animation-delay: 2s; width: 20px; height: 20px;"></div>
+        <div class="falling-petal" style="left: 50%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
         <div class="falling-petal" style="left: 70%; animation-duration: 7s; animation-delay: 2s; width: 16px; height: 16px;"></div>
-        <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 0.5s; width: 14px; height: 14px;"></div>
+        <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 1.5s; width: 14px; height: 14px;"></div>
     </div>
 
+    <!-- Cabecera con doble efecto Máquina de Escribir -->
     <div class="container">
-        <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
-        <div class="typewriter-container">
+        <div class="typewriter-title-container">
+            <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
+        </div>
+        <br>
+        <div class="typewriter-text-container">
             <div class="typewriter-text">Un detalle digital para celebrar nuestra gran amistad... ✨</div>
         </div>
-        
-        <!-- Botón de Frases Libre -->
-        <button class="phrase-btn" onclick="mostrarFrase()">
-            ✨ Clic para una frase bonita
-        </button>
-        
-        <!-- Lugar donde se muestra la frase -->
-        <div class="phrase-display" id="phraseDisplay"></div>
     </div>
     
     <!-- El Ramo de 8 Flores Interactivas -->
