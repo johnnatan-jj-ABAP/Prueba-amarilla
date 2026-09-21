@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flores Amarillas para Ti 💛</title>
+    <title>Para: MISS 💛</title>
     <style>
         * {
             margin: 0;
@@ -22,53 +22,84 @@
             overflow: hidden;
             text-align: center;
             padding: 30px 15px;
+            position: relative;
         }
 
         .container {
-            animation: fadeIn 2s ease-in-out forwards;
-            z-index: 5;
-            margin-top: 10px;
+            z-index: 10;
+            margin-top: 45px;
+            width: 100%;
+            max-width: 450px;
         }
 
+        /* Estructuras contenedoras para el efecto Máquina de Escribir */
+        .typewriter-title-container, .typewriter-text-container {
+            display: inline-block;
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        /* Título Principal Animado */
         h1 {
             color: #b58100;
-            font-size: 2.3rem;
-            margin-bottom: 8px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.08);
+            font-size: 2rem;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.06);
+            border-right: 2px solid #b58100;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: 
+                typingTitle 2s steps(30, end) forwards,
+                blinkTitle 0.75s step-end infinite;
         }
 
-        p {
+        /* Subtítulo Animado (Inicia después del título) */
+        .typewriter-text {
             color: #795548;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
-            max-width: 400px;
             margin: 0 auto;
+            border-right: 2px solid #795548;
+            white-space: nowrap;
+            overflow: hidden;
+            width: 0;
+            animation: 
+                typingText 3.5s steps(40, end) 2.2s forwards,
+                blinkText 0.75s step-end infinite 2.2s;
         }
 
-        /* Jardín contenedor de las 8 flores */
+        /* El Ramo de las 8 flores */
         .garden {
             display: flex;
             justify-content: center;
             align-items: flex-end;
             gap: 10px;
             width: 100%;
-            max-width: 600px;
-            height: 450px;
+            max-width: 550px;
+            height: 400px;
             position: relative;
-            z-index: 5;
+            z-index: 20;
             margin-bottom: 10px;
         }
 
-        /* Estructura base de cada flor */
+        /* Flor con reacción física al pasar el cursor o tocar */
         .flower-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            width: 12%;
+            width: 11%;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Ajustes de tamaño y escala para dar variedad a las 8 flores */
+        /* ¡EFECTO RESTAURADO! Crece y resalta al interactuar */
+        .flower-wrapper:hover {
+            transform: scale(1.25) translateY(-10px) !important;
+            z-index: 50 !important;
+        }
+
+        /* Variación de escalas base en el ramo */
         .f1 { transform: scale(1.1); z-index: 5; }
         .f2 { transform: scale(0.9); z-index: 4; }
         .f3 { transform: scale(1.0); z-index: 4; }
@@ -78,11 +109,10 @@
         .f7 { transform: scale(0.85); z-index: 2; }
         .f8 { transform: scale(0.75); z-index: 1; }
 
-        /* Cabeza de la flor */
         .flower-head {
             position: relative;
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -95,19 +125,17 @@
             animation: spin 30s linear infinite, scaleUp 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Pétalos simétricos */
         .petal {
             position: absolute;
             background: #ffd54f;
             border: 2px solid #ffca28;
             border-radius: 0 70% 0 70%;
-            width: 30px;
-            height: 30px;
-            top: 15px;
-            left: 45px;
+            width: 26px;
+            height: 26px;
+            top: 14px;
+            left: 40px;
             transform-origin: 0% 100%;
             opacity: 0.95;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
         }
 
         .petal:nth-child(1) { transform: rotate(0deg); }
@@ -119,101 +147,106 @@
         .petal:nth-child(7) { transform: rotate(270deg); }
         .petal:nth-child(8) { transform: rotate(315deg); }
 
-        /* Centro de la flor */
         .center {
             position: absolute;
             background: #ffb300;
             border: 2px solid #ffa000;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             z-index: 10;
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.15), 0 3px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s, box-shadow 0.3s;
         }
 
-        /* Tallos personalizados por altura */
+        /* ¡EFECTO DE BRILLO RESTAURADO! El centro de la flor resalta al hacer hover */
+        .flower-wrapper:hover .center {
+            background: #ffca28;
+            box-shadow: 0 0 12px #ffb300, inset 0 0 4px #fff;
+        }
+
         .stem {
-            width: 6px;
+            width: 5px;
             background: linear-gradient(to bottom, #4caf50, #2e7d32);
-            border-radius: 4px;
+            border-radius: 3px;
             transform-origin: bottom center;
             animation: growStem 2s ease-out forwards;
         }
 
-        .f1 .stem { height: 240px; }
-        .f2 .stem { height: 190px; }
-        .f3 .stem { height: 215px; }
-        .f4 .stem { height: 160px; }
-        .f5 .stem { height: 180px; }
-        .f6 .stem { height: 140px; }
-        .f7 .stem { height: 150px; }
-        .f8 .stem { height: 130px; }
+        .f1 .stem { height: 230px; }
+        .f2 .stem { height: 185px; }
+        .f3 .stem { height: 205px; }
+        .f4 .stem { height: 155px; }
+        .f5 .stem { height: 175px; }
+        .f6 .stem { height: 135px; }
+        .f7 .stem { height: 145px; }
+        .f8 .stem { height: 125px; }
 
-        /* Hojas */
         .leaf {
             position: absolute;
             background: linear-gradient(to right, #81c784, #4caf50);
             border: 1px solid #388e3c;
-            width: 22px;
-            height: 14px;
+            width: 18px;
+            height: 11px;
             border-radius: 0 100% 0 100%;
             opacity: 0;
             animation: fadeInLeaf 1s 1.5s ease-out forwards;
         }
 
-        .leaf.left { left: -18px; top: 40px; transform: rotate(-15deg); }
-        .leaf.right { right: -18px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
+        .leaf.left { left: -14px; top: 40px; transform: rotate(-15deg); }
+        .leaf.right { right: -14px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
 
-        /* Lluvia de pétalos de fondo */
+        /* Lluvia decorativa constante de fondo */
         .falling-petals {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 1;
+            top: 0; left: 0; width: 100%; height: 100%;
+            overflow: hidden; pointer-events: none; z-index: 1;
         }
 
         .falling-petal {
             position: absolute;
             background: #ffe082;
             border-radius: 0 80% 0 80%;
-            opacity: 0.7;
-            animation: fall linear infinite;
+            opacity: 0.6;
+            animation: fall 5s linear infinite;
         }
 
-        /* Animaciones */
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        /* Animaciones CSS Modernas */
+        @keyframes typingTitle { from { width: 0; } to { width: 100%; } }
+        @keyframes typingText { from { width: 0; } to { width: 100%; } }
+        @keyframes blinkTitle { from, to { border-color: transparent; } 50% { border-color: #b58100; } }
+        @keyframes blinkText { from, to { border-color: transparent; } 50% { border-color: #795548; } }
         @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
         @keyframes growStem { from { transform: scaleY(0); } to { transform: scaleY(1); } }
         @keyframes fadeInLeaf { from { opacity: 0; } to { opacity: 1; } }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes fall {
-            0% { top: -50px; transform: translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.7; }
-            90% { opacity: 0.7; }
-            100% { top: 105vh; transform: translateX(120px) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-40px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia de pétalos -->
+    <!-- Lluvia decorativa de fondo -->
     <div class="falling-petals">
-        <div class="falling-petal" style="width: 15px; height: 15px; left: 10%; animation-duration: 6s; animation-delay: 0s;"></div>
-        <div class="falling-petal" style="width: 22px; height: 22px; left: 25%; animation-duration: 8s; animation-delay: 2s;"></div>
-        <div class="falling-petal" style="width: 12px; height: 12px; left: 45%; animation-duration: 5s; animation-delay: 1s;"></div>
-        <div class="falling-petal" style="width: 18px; height: 18px; left: 65%; animation-duration: 7s; animation-delay: 3s;"></div>
-        <div class="falling-petal" style="width: 14px; height: 14px; left: 85%; animation-duration: 6s; animation-delay: 1.5s;"></div>
-        <div class="falling-petal" style="width: 20px; height: 20px; left: 55%; animation-duration: 9s; animation-delay: 4s;"></div>
+        <div class="falling-petal" style="left: 10%; animation-duration: 6s; width: 14px; height: 14px;"></div>
+        <div class="falling-petal" style="left: 25%; animation-duration: 8s; animation-delay: 2s; width: 20px; height: 20px;"></div>
+        <div class="falling-petal" style="left: 50%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
+        <div class="falling-petal" style="left: 70%; animation-duration: 7s; animation-delay: 2s; width: 16px; height: 16px;"></div>
+        <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 1.5s; width: 14px; height: 14px;"></div>
     </div>
 
-    <!-- Mensaje Superior Único -->
+    <!-- Cabecera con doble efecto Máquina de Escribir -->
     <div class="container">
-        <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
-        <p>Un detalle digital para celebrar nuestra hermosa amistad. ¡Que nunca te falten motivos para sonreír!</p>
+        <div class="typewriter-title-container">
+            <h1>¡Feliz 21 de Septiembre,! 🌼</h1>
+        </div>
+        <br>
+        <div class="typewriter-text-container">
+            <div class="typewriter-text">Un detalle digital para celebrar nuestra gran amistad... ✨</div>
+        </div>
     </div>
     
     <!-- El Ramo de 8 Flores Interactivas -->
