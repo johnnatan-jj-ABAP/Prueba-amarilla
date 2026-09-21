@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flores Amarillas para Ti 💛</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #fff9e6 0%, #ffecb3 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        h1 {
+            color: #b58100;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        p {
+            color: #66521a;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        /* Animación de la Flor */
+        .flower {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            animation: spin 20s linear infinite, scaleUp 1.5s ease-out;
+        }
+
+        .petal {
+            position: absolute;
+            background: #ffd54f;
+            border: 2px solid #ffca28;
+            border-radius: 0 70% 0 70%;
+            width: 50px;
+            height: 50px;
+            top: 50px;
+            left: 50px;
+            transform-origin: 0% 0%;
+            opacity: 0.95;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Posicionamiento de pétalos para formar la flor */
+        .petal:nth-child(1) { transform: rotate(0deg) translate(-25px, -25px); }
+        .petal:nth-child(2) { transform: rotate(45deg) translate(-25px, -25px); }
+        .petal:nth-child(3) { transform: rotate(90deg) translate(-25px, -25px); }
+        .petal:nth-child(4) { transform: rotate(135deg) translate(-25px, -25px); }
+        .petal:nth-child(5) { transform: rotate(180deg) translate(-25px, -25px); }
+        .petal:nth-child(6) { transform: rotate(225deg) translate(-25px, -25px); }
+        .petal:nth-child(7) { transform: rotate(270deg) translate(-25px, -25px); }
+        .petal:nth-child(8) { transform: rotate(315deg) translate(-25px, -25px); }
+
+        .center {
+            position: absolute;
+            background: #ffb300;
+            border: 2px solid #ffa000;
+            border-radius: 50%;
+            width: 55px;
+            height: 55px;
+            top: 47.5px;
+            left: 47.5px;
+            z-index: 10;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.15);
+        }
+
+        /* Brillos flotantes de fondo */
+        .sparkle {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            animation: float 4s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleUp {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-30px) scale(1.2); opacity: 0.8; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Brillos decorativos de fondo -->
+    <div class="sparkle" style="width: 10px; height: 10px; top: 20%; left: 15%; animation-delay: 0s;"></div>
+    <div class="sparkle" style="width: 15px; height: 15px; top: 70%; left: 80%; animation-delay: 1s;"></div>
+    <div class="sparkle" style="width: 8px; height: 8px; top: 40%; left: 85%; animation-delay: 2s;"></div>
+    <div class="sparkle" style="width: 12px; height: 12px; top: 80%; left: 20%; animation-delay: 1.5s;"></div>
+
+    <div class="container">
+        <h1>¡Feliz 21 de Septiembre! 🌼</h1>
+        <p>Te prometí que hoy no te quedarías sin tus flores amarillas...</p>
+        
+        <div style="display: flex; justify-content: center;">
+            <div class="flower">
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="petal"></div>
+                <div class="center"></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
