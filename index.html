@@ -25,8 +25,10 @@
             position: relative;
         }
 
+        /* Contenedor del texto superior */
         .container {
-            z-index: 10;
+            position: relative;
+            z-index: 100; 
             margin-top: 25px;
             width: 100%;
             max-width: 450px;
@@ -35,7 +37,7 @@
         h1 {
             color: #b58100;
             font-size: 2rem;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.06);
         }
 
@@ -44,7 +46,7 @@
             display: block;
             max-width: 100%;
             padding: 0 10px;
-            min-height: 40px;
+            min-height: 30px;
         }
 
         .typewriter-text {
@@ -61,22 +63,23 @@
                 blink 0.75s step-end infinite;
         }
 
-        /* Botón de Frases Interactivo */
+        /* EL ARREGLO DEFINTIVO: pointer-events asegura el clic */
         .phrase-btn {
             background: #ffb300;
             color: white;
             border: none;
-            padding: 10px 20px;
-            font-size: 0.95rem;
+            padding: 12px 24px;
+            font-size: 1rem;
             font-weight: bold;
             border-radius: 25px;
             cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
             transition: transform 0.2s, background 0.2s;
             margin-top: 15px;
-            display: inline-flex;
-            align-items: center;
-            z-index: 30;
+            display: inline-block;
+            position: relative;
+            z-index: 99999;
+            pointer-events: auto; /* Fuerza al navegador a aceptar el clic */
         }
 
         .phrase-btn:hover {
@@ -84,18 +87,18 @@
             transform: scale(1.05);
         }
 
-        /* Contenedor dinámico de la frase sorpresa */
         .phrase-display {
             color: #b58100;
             font-size: 1.1rem;
             font-weight: 600;
-            margin-top: 15px;
-            min-height: 30px;
+            margin-top: 20px;
+            min-height: 40px;
             padding: 0 15px;
-            animation: fadeInText 0.5s ease-in-out;
+            position: relative;
+            z-index: 99999;
         }
 
-        /* El Ramo de las 8 flores */
+        /* SOLUCIÓN AL MURO INVISIBLE: none hace que los clics atraviesen esta capa */
         .garden {
             display: flex;
             justify-content: center;
@@ -103,10 +106,11 @@
             gap: 10px;
             width: 100%;
             max-width: 550px;
-            height: 380px;
+            height: 350px;
             position: relative;
-            z-index: 20;
+            z-index: 10;
             margin-bottom: 5px;
+            pointer-events: none; 
         }
 
         .flower-wrapper {
@@ -115,12 +119,6 @@
             align-items: center;
             position: relative;
             width: 11%;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .flower-wrapper:hover {
-            transform: scale(1.25) translateY(-10px) !important;
-            z-index: 50 !important;
         }
 
         /* Escalas ramo */
@@ -179,12 +177,6 @@
             width: 24px;
             height: 24px;
             z-index: 10;
-            transition: background 0.3s, box-shadow 0.3s;
-        }
-
-        .flower-wrapper:hover .center {
-            background: #ffca28;
-            box-shadow: 0 0 12px #ffb300, inset 0 0 4px #fff;
         }
 
         .stem {
@@ -195,14 +187,14 @@
             animation: growStem 2s ease-out forwards;
         }
 
-        .f1 .stem { height: 220px; }
-        .f2 .stem { height: 175px; }
-        .f3 .stem { height: 195px; }
-        .f4 .stem { height: 145px; }
-        .f5 .stem { height: 165px; }
-        .f6 .stem { height: 125px; }
-        .f7 .stem { height: 135px; }
-        .f8 .stem { height: 115px; }
+        .f1 .stem { height: 200px; }
+        .f2 .stem { height: 160px; }
+        .f3 .stem { height: 180px; }
+        .f4 .stem { height: 130px; }
+        .f5 .stem { height: 150px; }
+        .f6 .stem { height: 110px; }
+        .f7 .stem { height: 120px; }
+        .f8 .stem { height: 100px; }
 
         .leaf {
             position: absolute;
@@ -215,8 +207,8 @@
             animation: fadeInLeaf 1s 1.5s ease-out forwards;
         }
 
-        .leaf.left { left: -14px; top: 40px; transform: rotate(-15deg); }
-        .leaf.right { right: -14px; top: 60px; transform: scaleX(-1) rotate(-15deg); }
+        .leaf.left { left: -14px; top: 35px; transform: rotate(-15deg); }
+        .leaf.right { right: -14px; top: 50px; transform: scaleX(-1) rotate(-15deg); }
 
         /* Lluvia decorativa de fondo */
         .falling-petals {
@@ -233,7 +225,7 @@
             animation: fall 5s linear infinite;
         }
 
-        /* Animaciones */
+        /* Animaciones CSS */
         @keyframes typing { from { width: 0; } to { width: 100%; } }
         @keyframes blink { from, to { border-color: transparent; } 50% { border-color: #795548; } }
         @keyframes scaleUp { from { transform: scale(0); } to { transform: scale(1); } }
@@ -245,12 +237,11 @@
             10% { opacity: 0.6; }
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
-        @keyframes fadeInText { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <!-- Lluvia decorativa -->
+    <!-- Lluvia decorativa de fondo -->
     <div class="falling-petals">
         <div class="falling-petal" style="left: 10%; animation-duration: 6s; width: 14px; height: 14px;"></div>
         <div class="falling-petal" style="left: 30%; animation-duration: 5s; animation-delay: 1s; width: 12px; height: 12px;"></div>
@@ -258,20 +249,18 @@
         <div class="falling-petal" style="left: 85%; animation-duration: 6s; animation-delay: 0.5s; width: 14px; height: 14px;"></div>
     </div>
 
-    <!-- Cabecera con Animación y Botón -->
     <div class="container">
         <h1>¡Feliz 21 de Septiembre, MISS! 🌼</h1>
         <div class="typewriter-container">
             <div class="typewriter-text">Un detalle digital para celebrar nuestra gran amistad... ✨</div>
         </div>
         
-        <!-- Botón de Frases -->
-        <br>
+        <!-- Botón de Frases Libre -->
         <button class="phrase-btn" onclick="mostrarFrase()">
             ✨ Clic para una frase bonita
         </button>
         
-        <!-- Lugar donde se muestra la frase aleatoria -->
+        <!-- Lugar donde se muestra la frase -->
         <div class="phrase-display" id="phraseDisplay"></div>
     </div>
     
